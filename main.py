@@ -1,15 +1,7 @@
-import os
-import tempfile
 import streamlit as st
 
+from app_config import LOCAL_DB_PATH, REMOTE_DB_FULL, REMOTE_DB_RECENT
 from db_sync import ensure_local_db
-
-# --- KONFIG ---
-DB_PATH_REMOTE_FULL = r"I:\6_EQUITIES\Database\Eiere-Database\topchanges.db"
-DB_PATH_REMOTE_RECENT = r"I:\6_EQUITIES\Database\Eiere-Database\topchanges_recent_60d.db"
-
-LOCAL_WORKDIR = os.path.join(tempfile.gettempdir(), "topchanges_sqlite_work")
-DB_PATH_LOCAL = os.path.join(LOCAL_WORKDIR, "topchanges.db")
 
 # -----------------------------
 # Page config
@@ -223,7 +215,7 @@ if st.session_state.db_ready and st.session_state.db_ready_for != st.session_sta
     st.session_state.db_ready = False
 
 choice = st.session_state.db_choice
-remote_path = DB_PATH_REMOTE_RECENT if choice.startswith("Rask") else DB_PATH_REMOTE_FULL
+remote_path = REMOTE_DB_RECENT if choice.startswith("Rask") else REMOTE_DB_FULL
 
 colA, colB, colC = st.columns([1, 1, 2], gap="large")
 with colA:
@@ -235,7 +227,7 @@ with colB:
     force_copy = st.checkbox("Tving ny kopi", value=False, help="Kopierer på nytt selv om lokal DB ser oppdatert ut.")
 
 with colC:
-    st.info(f"Valgt remote: {remote_path}\n\nLokal fil: {DB_PATH_LOCAL}")
+    st.info(f"Valgt remote: {remote_path}\n\nLokal fil: {LOCAL_DB_PATH}")
 
 with st.expander("Database-status", expanded=True):
     status = st.empty()
@@ -249,7 +241,7 @@ with st.expander("Database-status", expanded=True):
         try:
             info = ensure_local_db(
                 remote_db_path=remote_path,
-                local_db_path=DB_PATH_LOCAL,   # alltid samme lokale navn
+                local_db_path=LOCAL_DB_PATH,   # alltid samme lokale navn
                 on_progress=ui_progress,
                 force=force_copy,
                 copy_wal_shm=True,
