@@ -172,6 +172,7 @@ with st.sidebar:
         "Handler per aksje",
         "Handler de beste",
         "Eier oversikt",
+        "Beste investorer",
         "Alle eiere i et selskap",
         "Topp 20 viktige",
     ]
@@ -285,6 +286,7 @@ cards = [
     ("Handler per aksje", "Analyser volum og aktivitet per aksje, med filtrering på periode og segment.", "📈"),
     ("Handler de beste", "Fremhev de mest interessante handlene basert på regler (kommer senere).", "⭐"),
     ("Eier oversikt", "Oppsummering av eierskap og endringer over tid, per aksje eller per eier.", "🧭"),
+    ("Beste investorer", "Finn investorene med sterkest historisk avkastning basert på handler.", "💡"),
     ("Alle eiere i et selskap", "Vis full eierliste for valgt selskap og endringer i beholdning.", "🏢"),
     ("Topp 20 viktige", "Kurert liste over topp 20 (defineres senere) med raske innsikter.", "🏆"),
 ]
